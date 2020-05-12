@@ -22,7 +22,7 @@ async function lateLoadContent() {
 
 document.addEventListener('DOMContentLoaded', function () {
   // @ts-ignore
-  install()
+  install({ includeCacheMisses: true })
 
   if (window.location.pathname.indexOf('/content') !== 0) {
     lateLoadContent()
