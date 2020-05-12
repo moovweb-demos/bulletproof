@@ -13,12 +13,11 @@ new Prefetcher({
         maxMatches: 1,
         attribute: 'src',
         as: 'image',
-        // callback: logPrefetchedContent,
       },
       {
-        selector: '#mobile-product-images #product-thumbnails .lazyload-blur-wrapper>img',
-        maxMatches: 1,
-        attribute: 'src',
+        selector: '.product-thumbnails-wrapper img',
+        maxMatches: 2,
+        attribute: 'data-src',
         as: 'image',
         callback: deepFetchResponsiveImages,
       },
@@ -37,6 +36,9 @@ new Prefetcher({
 function deepFetchResponsiveImages({ $el, el, $ }: DeepFetchCallbackParam) {
   const urlTemplate = $el.attr('data-src')
   // const dataWidths = $el.attr('data-widths')
+  
+  // for mobile we want to fetch the 900 width. 
+  // For desktop it would be the 1800. We're not prefetching that for now.
   const width = "900"
   if (urlTemplate && width) {
     // const widths = JSON.parse(dataWidths)
@@ -46,10 +48,12 @@ function deepFetchResponsiveImages({ $el, el, $ }: DeepFetchCallbackParam) {
     // }
 
     const url = urlTemplate.replace(/\{width\}/,width)
+    // console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching "+url+"\n")
     prefetch(url, 'image')
   }
 }
 
 function logPrefetchedContent({$el}) { // for testing
+  console.log("[][]][][[][]][][][][][[]][[][][]")
   console.log("content '"+$el.attr('src')+"' has been prefetched...")
 }
