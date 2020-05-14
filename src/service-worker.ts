@@ -19,13 +19,14 @@ new Prefetcher({
         maxMatches: 2,
         attribute: 'data-src',
         as: 'image',
-        callback: deepFetchResponsiveImages,
+        callback: deepFetchPDPImages,
       },
       {
         selector: '.indiv-product img',
         maxMatches: 2,
-        attribute: 'src',
+        attribute: 'data-src',
         as: 'image',
+        callback: deepFetchPLPImages,
       },
     ]),
   ],
@@ -33,7 +34,7 @@ new Prefetcher({
   .route()
   .cache(/^https:\/\/cdn\.shopify\.com\/.*/)
 
-function deepFetchResponsiveImages({ $el, el, $ }: DeepFetchCallbackParam) {
+function deepFetchPDPImages({ $el, el, $ }: DeepFetchCallbackParam) {
   const urlTemplate = $el.attr('data-src')
   // const dataWidths = $el.attr('data-widths')
 
@@ -54,6 +55,16 @@ function deepFetchResponsiveImages({ $el, el, $ }: DeepFetchCallbackParam) {
     // console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching "+url+"\n")
     prefetch(url, 'image')
     prefetch(zoomUrl, 'image')
+  }
+}
+
+function deepFetchPLPImages({ $el, el, $ }: DeepFetchCallbackParam) {
+  const urlTemplate = $el.attr('data-src')
+  const width = "300"
+  if (urlTemplate) {
+    const url = urlTemplate.replace(/\{width\}/,width)
+    console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching "+url+"\n")
+    prefetch(url, 'image')
   }
 }
 
