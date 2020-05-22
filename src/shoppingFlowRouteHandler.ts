@@ -4,14 +4,14 @@ import transformResponse from './transform'
 
 const handler: RouteHandler = async ({
   cache,
-  removeResponseHeader,
+  removeUpstreamResponseHeader,
   updateResponseHeader,
   proxy,
 }) => {
   cache(CACHE_PAGES)
-  removeResponseHeader('set-cookie')
-  await proxy('origin', {transformResponse})
+  removeUpstreamResponseHeader('set-cookie')
   updateResponseHeader('location', /https:\/\/lxrco.com\//gi, '/') // convert absolute redirects to origin to relative so that the user isn't transferred to the origin.
+  proxy('origin', { transformResponse })
 }
 
 export default handler
