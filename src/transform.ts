@@ -7,7 +7,7 @@ export default function transform(response) {
   $('a').each(function() {
     var url = $(this).attr('href');
     if (url) {
-      $( this ).attr('href', url.replace('https://www.ashleyfurniture.com',''));
+      $( this ).attr('href', url.replace('https://www.ashleyfurniture.com','').replace('http://www.ashleyfurniture.com',''))               
     }
   });
 

@@ -17,17 +17,24 @@ new Prefetcher({
       {
         selector: '.slick-slider img',
         maxMatches: 2,
-        attribute: 'data-src',
+        attribute: 'src',
         as: 'image',
         callback: deepFetchPDPImages,
       },
       {
         selector: 'img.primary-image',
         maxMatches: 2,
-        attribute: 'data-src',
+        attribute: 'src',
         as: 'image',
         callback: deepFetchPLPImages,
       },
+      {
+        selector: '.af-main-category-row picture img',
+        maxMatches: 2,
+        attribute: 'src',
+        as: 'image',
+        callback: deepFetchCATImages,
+      },      
     ]),
   ],
 })
@@ -48,7 +55,15 @@ function deepFetchPDPImages({ $el, el, $ }: DeepFetchCallbackParam) {
 function deepFetchPLPImages({ $el, el, $ }: DeepFetchCallbackParam) {
 
   const url = $el.attr('src')  
-  console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching plp: "+url+"\n")  
+  console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching PLP: "+url+"\n")  
+  prefetch(url, 'image')  
+
+}
+
+function deepFetchCATImages({ $el, el, $ }: DeepFetchCallbackParam) {
+
+  const url = $el.attr('src')  
+  console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching CAT: "+url+"\n")  
   prefetch(url, 'image')  
 
 }
