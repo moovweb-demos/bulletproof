@@ -17,17 +17,17 @@ new Prefetcher({
       {
         selector: '.product-thumbnails-wrapper img',
         maxMatches: 2,
-        attribute: 'src',
+        attribute: 'data-src',
         as: 'image',
         callback: deepFetchPDPImages,
       },
       {
         selector: '.indiv-product img',
         maxMatches: 2,
-        attribute: 'src',
+        attribute: 'data-src',
         as: 'image',
         callback: deepFetchPLPImages,
-      },    
+      },
     ]),
   ],
 })
@@ -58,7 +58,6 @@ function deepFetchPDPImages({ $el, el, $ }: DeepFetchCallbackParam) {
 }
 
 function deepFetchPLPImages({ $el, el, $ }: DeepFetchCallbackParam) {
-
   const urlTemplate = $el.attr('data-src')
   const width = "300"
   if (urlTemplate) {
@@ -66,7 +65,6 @@ function deepFetchPLPImages({ $el, el, $ }: DeepFetchCallbackParam) {
     // console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching "+url+"\n")
     prefetch(url, 'image')
   }
-
 }
 
 function logPrefetchedContent({$el}) { // for testing
