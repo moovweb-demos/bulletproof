@@ -2,8 +2,8 @@ module.exports = {
   routes: './src/routes.ts',
   backends: {
     origin: {
-      domainOrIp: 'lxrco.com',
-      hostHeader: 'lxrco.com',
+      domainOrIp: 'www.ashleyfurniture.com',
+      hostHeader: 'www.ashleyfurniture.com',
     },
   },
 }

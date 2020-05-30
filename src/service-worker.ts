@@ -15,14 +15,14 @@ new Prefetcher({
         as: 'image',
       },
       {
-        selector: '.product-thumbnails-wrapper img',
+        selector: '.slick-slider img',
         maxMatches: 2,
         attribute: 'data-src',
         as: 'image',
         callback: deepFetchPDPImages,
       },
       {
-        selector: '.indiv-product img',
+        selector: 'img.primary-image',
         maxMatches: 2,
         attribute: 'data-src',
         as: 'image',
@@ -32,39 +32,25 @@ new Prefetcher({
   ],
 })
   .route()
-  .cache(/^https:\/\/cdn\.shopify\.com\/.*/)
+  .cache(/^https:\/\/ashleyfurniture\.scene7\.com\/.*/)  
 
 function deepFetchPDPImages({ $el, el, $ }: DeepFetchCallbackParam) {
-  const urlTemplate = $el.attr('data-src')
-  // const dataWidths = $el.attr('data-widths')
-  // for mobile we want to fetch the 900 width. 
-  // For desktop and the zoom image it would be the 1800.
-  // Also some mobile versions seem to use 1800 so fetching both widths
-  const width = "900"
-  const zoomWidth = "1800"
-  if (urlTemplate) {
-    // const widths = JSON.parse(dataWidths)
-    // for (let width of widths.slice(0, 2)) {
-    //   const url = urlTemplate?.replace(/\{width\}/, width)
-    //   prefetch(url, 'image')
-    // }
 
-    const url = urlTemplate.replace(/\{width\}/,width)
-    const zoomUrl = urlTemplate.replace(/\{width\}/,zoomWidth)
-    // console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching "+url+"\n")
-    prefetch(url, 'image')
-    prefetch(zoomUrl, 'image')
-  }
+  const url = $el.attr('src')
+  const zoomUrl = $el.attr('data-zoom-src')
+  console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching PDP url: "+url+"\n")
+  console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching PDP zoomUrl: "+zoomUrl+"\n")
+  prefetch(url, 'image')
+  prefetch(zoomUrl, 'image')
+  
 }
 
 function deepFetchPLPImages({ $el, el, $ }: DeepFetchCallbackParam) {
-  const urlTemplate = $el.attr('data-src')
-  const width = "300"
-  if (urlTemplate) {
-    const url = urlTemplate.replace(/\{width\}/,width)
-    // console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching "+url+"\n")
-    prefetch(url, 'image')
-  }
+
+  const url = $el.attr('src')  
+  console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching plp: "+url+"\n")  
+  prefetch(url, 'image')  
+
 }
 
 function logPrefetchedContent({$el}) { // for testing
