@@ -4,8 +4,8 @@ import shoppingFlowRouteHandler from './shoppingFlowRouteHandler'
 
 export default new Router()
   .match('/', shoppingFlowRouteHandler)
-  .match('/c/*path', shoppingFlowRouteHandler)
-  .match('/p/*path', shoppingFlowRouteHandler)
+  .match('/collections/*path', shoppingFlowRouteHandler)
+  .match('/products/*path', shoppingFlowRouteHandler)
   .match('/service-worker.js', ({ serviceWorker }) => serviceWorker('dist/service-worker.js'))
   .match('/main.js', ({ serveStatic, cache }) => {
     cache(CACHE_ASSETS)

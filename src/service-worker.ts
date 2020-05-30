@@ -15,56 +15,57 @@ new Prefetcher({
         as: 'image',
       },
       {
-        selector: '.slick-slider img',
+        selector: '.product-thumbnails-wrapper img',
         maxMatches: 2,
         attribute: 'src',
         as: 'image',
         callback: deepFetchPDPImages,
       },
       {
-        selector: 'img.primary-image',
+        selector: '.indiv-product img',
         maxMatches: 2,
         attribute: 'src',
         as: 'image',
         callback: deepFetchPLPImages,
-      },
-      {
-        selector: '.af-main-category-row picture img',
-        maxMatches: 2,
-        attribute: 'src',
-        as: 'image',
-        callback: deepFetchCATImages,
-      },      
+      },    
     ]),
   ],
 })
   .route()
-  .cache(/^https:\/\/ashleyfurniture\.scene7\.com\/.*/)  
+  .cache(/^https:\/\/cdn\.shopify\.com\/.*/)
 
 function deepFetchPDPImages({ $el, el, $ }: DeepFetchCallbackParam) {
+  const urlTemplate = $el.attr('data-src')
+  // const dataWidths = $el.attr('data-widths')
+  // for mobile we want to fetch the 900 width. 
+  // For desktop and the zoom image it would be the 1800.
+  // Also some mobile versions seem to use 1800 so fetching both widths
+  const width = "900"
+  const zoomWidth = "1800"
+  if (urlTemplate) {
+    // const widths = JSON.parse(dataWidths)
+    // for (let width of widths.slice(0, 2)) {
+    //   const url = urlTemplate?.replace(/\{width\}/, width)
+    //   prefetch(url, 'image')
+    // }
 
-  const url = $el.attr('src')
-  const zoomUrl = $el.attr('data-zoom-src')
-  console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching PDP url: "+url+"\n")
-  console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching PDP zoomUrl: "+zoomUrl+"\n")
-  prefetch(url, 'image')
-  prefetch(zoomUrl, 'image')
-  
+    const url = urlTemplate.replace(/\{width\}/,width)
+    const zoomUrl = urlTemplate.replace(/\{width\}/,zoomWidth)
+    // console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching "+url+"\n")
+    prefetch(url, 'image')
+    prefetch(zoomUrl, 'image')
+  }
 }
 
 function deepFetchPLPImages({ $el, el, $ }: DeepFetchCallbackParam) {
 
-  const url = $el.attr('src')  
-  console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching PLP: "+url+"\n")  
-  prefetch(url, 'image')  
-
-}
-
-function deepFetchCATImages({ $el, el, $ }: DeepFetchCallbackParam) {
-
-  const url = $el.attr('src')  
-  console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching CAT: "+url+"\n")  
-  prefetch(url, 'image')  
+  const urlTemplate = $el.attr('data-src')
+  const width = "300"
+  if (urlTemplate) {
+    const url = urlTemplate.replace(/\{width\}/,width)
+    // console.log("[][]][][[][]][][][][][[]][[][][]\nPrefetching "+url+"\n")
+    prefetch(url, 'image')
+  }
 
 }
 
