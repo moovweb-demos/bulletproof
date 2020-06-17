@@ -10,7 +10,9 @@ const handler: RouteHandler = async ({
 }) => {
   cache(CACHE_PAGES)
   removeUpstreamResponseHeader('set-cookie')
-  updateResponseHeader('location', /https:\/\/lxrco.com\//gi, '/') // convert absolute redirects to origin to relative so that the user isn't transferred to the origin.
+  // convert absolute redirects to origin to relative so that the user isn't transferred to the origin.
+  // NOTE: make sure this exactly matches the origin host in xdn.config.js!
+  updateResponseHeader('location', /https:\/\/lxrco.com\//gi, '/')
   proxy('origin', { transformResponse })
 }
 
