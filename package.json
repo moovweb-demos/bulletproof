@@ -2,9 +2,9 @@
   "name": "lxrco",
   "devDependencies": {
     "@types/node": "^14.0.1",
-    "@xdn/cli": "^1.27.4",
-    "@xdn/core": "^1.27.4",
-    "@xdn/prefetch": "^1.27.4",
+    "@xdn/cli": "^1.34.10",
+    "@xdn/core": "^1.34.10",
+    "@xdn/prefetch": "^1.34.10",
     "nodemon": "^2.0.3",
     "prettier": "^2.0.5",
     "serverless": "^1.70.1",
@@ -20,7 +20,7 @@
     "start": "nodemon",
     "build": "webpack && xdn build",
     "prod": "xdn run --production",
-    "deploy": "xdn deploy moovweb-demos",
+    "deploy": "xdn deploy demos",
     "xdn": "xdn",
     "xdn:update": "npm i --save-dev @xdn/cli@latest @xdn/core@latest @xdn/prefetch@latest",
     "xdn:link": "yalc add @xdn/core @xdn/prefetch @xdn/cli"
