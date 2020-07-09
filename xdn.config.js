@@ -4,6 +4,7 @@ module.exports = {
     origin: {
       domainOrIp: 'lxrco.com',
       hostHeader: 'lxrco.com',
+      disableCheckCert: process.env.DISABLE_CHECK_CERT || true,
     },
   },
 }
