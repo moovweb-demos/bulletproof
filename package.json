@@ -2,9 +2,9 @@
   "name": "lxrco",
   "devDependencies": {
     "@types/node": "^14.0.1",
-    "@xdn/cli": "^1.37.1",
-    "@xdn/core": "^1.37.1",
-    "@xdn/prefetch": "^1.37.1",
+    "@xdn/cli": "^1.39.2",
+    "@xdn/core": "^1.39.2",
+    "@xdn/prefetch": "^1.39.2",
     "nodemon": "^2.0.3",
     "prettier": "^2.0.5",
     "serverless": "^1.70.1",
