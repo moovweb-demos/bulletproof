@@ -1,5 +1,5 @@
 {
-  "name": "lxrco",
+  "name": "bulletproof",
   "devDependencies": {
     "@types/node": "^14.0.1",
     "@xdn/cli": "^1.39.2",

@@ -14,7 +14,8 @@ const handler: RouteHandler = async ({
   // convert absolute redirects to origin to relative so that the user isn't transferred to the origin.
   // NOTE: make sure this exactly matches the origin host in xdn.config.js!
   setResponseHeader('cache-control', 'public, max-age=86400') // change the cache headers to be cachable
-  updateResponseHeader('location', /https:\/\/lxrco.com\//gi, '/')
+  updateResponseHeader('location', /https:\/\/www.bulletproof.com\//gi, '/')
+  updateResponseHeader('location', /https:\/\/shop.bulletproof.com\//gi, '/')  
   proxy('origin', { transformResponse })
 }
 
